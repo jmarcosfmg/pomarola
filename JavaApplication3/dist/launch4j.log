@@ -1,0 +1,27 @@
+
+
+Version:	3.12
+CmdLine:	C:\Users\João\Documents\NetBeansProjects\JavaApplication3\dist\Pomarola.exe --l4j-debug
+WOW64:		yes
+Working dir:	C:\Users\João\Documents\NetBeansProjects\JavaApplication3\dist\.
+Java min ver:	1.000.008
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Check launcher:	F:\Java\Java\bin\javaw.exe (OK)
+Match:		1.008.000
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_171
+Check launcher:	F:\Java\Java\bin\javaw.exe (OK)
+Match:		1.008.000_171
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.008.000
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_171
+Ignore:		1.008.000_171
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Runtime used:	1.008.000_171 (64-bit)
+Launcher:	F:\Java\Java\bin\javaw.exe
+Launcher args:	-jar "C:\Users\João\Documents\NetBeansProjects\JavaApplication3\dist\Pomarola.exe"
+Args length:	82/32768 chars
+Exit code:	0
