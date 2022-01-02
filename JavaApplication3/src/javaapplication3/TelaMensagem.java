@@ -4,26 +4,37 @@
  * and open the template in the editor.
  */
 package javaapplication3;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JFrame;
+import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.*;
+
 /**
- *
  * @author João
  */
 public class TelaMensagem extends javax.swing.JDialog {
 
+    private Clip clip;
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * Creates new form NewJDialog1
      */
-    public TelaMensagem(java.awt.Frame parent, boolean modal) throws LineUnavailableException{
+    public TelaMensagem(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         verificarciclo();
-            musica();
+        tocarMusica();
 
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -38,7 +49,8 @@ public class TelaMensagem extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        javax.swing.JButton jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -57,66 +69,69 @@ public class TelaMensagem extends javax.swing.JDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(47, 47, 47))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(177, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(47, 47, 47))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        
+
         clip.close();
         this.setModalityType(Dialog.ModalityType.MODELESS);
         this.dispose();
         JavaApplication3.caixa();
     }//GEN-LAST:event_jButton1MouseClicked
-   
-    private void verificarciclo(){
+
+    private void verificarciclo() {
         int n = JavaApplication3.ciclo;
-        if (n%2 == 0) jLabel1.setText("Hora de Trabalhar ┬─┬ノ(^_^ノ)");
+        if (n % 2 == 0) jLabel1.setText("Hora de Trabalhar ┬─┬ノ(^_^ノ)");
         else jLabel1.setText("Hora de descansar (╯^°^）╯︵ ┻━┻");
     }
+
     /**
      * @param args the command line arguments
      */
-    
-    private void musica() throws LineUnavailableException{
-    int n = JavaApplication3.ciclo;
+
+    private void tocarMusica() {
+        int n = JavaApplication3.ciclo;
+        Logger.getLogger(TelaMensagem.class.getName()).log(Level.INFO, "Iniciando música");
+        URL resourceUrl = null;
         try {
-            clip = (Clip) AudioSystem.getClip();
+            clip = AudioSystem.getClip();
         } catch (LineUnavailableException ex) {
-            Logger.getLogger(TelaMensagem.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaMensagem.class.getName()).log(Level.SEVERE, "Audio nao encontrado", ex);
         }
         try {
-            clip.open(AudioSystem.getAudioInputStream(new File((n%2 == 0)? "trabalho.wav": "descanso.wav")));
-        } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(TelaMensagem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(TelaMensagem.class.getName()).log(Level.SEVERE, null, ex);
+            resourceUrl = getClass().getResource("resources/sounds/" + ((n % 2 == 0) ? "trabalho.wav" : "descanso.wav"));
+            clip.open(AudioSystem.getAudioInputStream(resourceUrl));
+        } catch (NullPointerException | UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            Logger.getLogger(TelaMensagem.class.getName()).log(Level.SEVERE, "Erro ao executar a música: " + resourceUrl, ex);
         }
-    clip.start();
+        clip.start();
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -125,13 +140,7 @@ public class TelaMensagem extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaMensagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaMensagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaMensagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaMensagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -140,10 +149,11 @@ public class TelaMensagem extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaMensagem dialog = null;
+                TelaMensagem dialog = new TelaMensagem(new JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
+                        Logger.getLogger(TelaMensagem.class.getName()).log(Level.INFO, "Encerrando painel de mensagem");
                         System.exit(0);
                     }
                 });
@@ -151,10 +161,4 @@ public class TelaMensagem extends javax.swing.JDialog {
             }
         });
     }
-
-    private Clip clip;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    // End of variables declaration//GEN-END:variables
 }

@@ -5,14 +5,22 @@
  */
 package javaapplication3;
 
+import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.Color;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- *
  * @author João
  */
 public class TelaTempo extends javax.swing.JDialog {
+
+    public static boolean aux;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JProgressBar jProgressBar1;
+    // End of variables declaration//GEN-END:variables
 
     /**
      * Creates new form NewJDialog
@@ -20,14 +28,16 @@ public class TelaTempo extends javax.swing.JDialog {
     public TelaTempo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tempos();
+        calcularBarraTemporal();
         this.setLocationRelativeTo(null);
-        Thread oi = new Thread(){public void run() {
-        tempoAtual();
-        }  
+        Thread oi = new Thread() {
+            public void run() {
+                tempoAtual();
+            }
         };
         oi.start();
-        this.setVisible(true); 
+        this.setVisible(true);
+        Logger.getLogger(TelaTempo.class.getName()).log(Level.INFO, "Mostrando painel de tempo");
     }
 
     /**
@@ -39,10 +49,11 @@ public class TelaTempo extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        javax.swing.JButton jButton1 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -66,48 +77,48 @@ public class TelaTempo extends javax.swing.JDialog {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(14, 14, 14))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(14, 14, 14))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         pack();
@@ -118,38 +129,40 @@ public class TelaTempo extends javax.swing.JDialog {
         this.dispose();
         IconeTarefa.colocar();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    public void tempos(){
+
+    private void calcularBarraTemporal() {
         this.jProgressBar1.setMinimum(0);
         this.jProgressBar1.setMaximum((int) TimeUnit.SECONDS.convert(JavaApplication3.getTempoF() - JavaApplication3.getTempoI(), TimeUnit.MILLISECONDS));
     }
-    
-    public void acabar(){
+
+    private void encerrarTempo() {
+        Logger.getLogger(TelaTempo.class.getName()).log(Level.INFO, "Tempo esgotado");
         aux = false;
         this.dispose();
     }
-    
-    public void tempoAtual(){
+
+    public void tempoAtual() {
         aux = true;
         int cic = JavaApplication3.ciclo;
-        jLabel1.setText("Tempo de " + (cic%2 ==0? "trabalho " : "descanso ") + "restante:");
-        jProgressBar1.setForeground(cic%2 ==0? new Color(255,222,0) : Color.green);
+        jLabel1.setText("Tempo de " + (cic % 2 == 0 ? "trabalho " : "descanso ") + "restante:");
+        jProgressBar1.setForeground(cic % 2 == 0 ? new Color(255, 222, 0) : Color.green);
         long lCurrentTime;
         int lRemTime;
         int remMinutes;
         this.jProgressBar1.setMinimum(0);
         this.jProgressBar1.setMaximum((int) TimeUnit.SECONDS.convert(JavaApplication3.getTempoF() - JavaApplication3.getTempoI(), TimeUnit.MILLISECONDS));
-        while(aux == true){
+        while (aux) {
             lCurrentTime = System.currentTimeMillis();
             lRemTime = (int) TimeUnit.SECONDS.convert(JavaApplication3.getTempoF() - lCurrentTime, TimeUnit.MILLISECONDS);
             this.jProgressBar1.setValue(jProgressBar1.getMaximum() - lRemTime);
-            remMinutes = lRemTime/60;
-            if (remMinutes !=0) jLabel2.setText((remMinutes == 1? remMinutes + " Minuto " : remMinutes + " Minutos ") + (lRemTime - remMinutes*60) + " Segundos");
-            else  jLabel2.setText((lRemTime - remMinutes*60) + " Segundos");
-            if (lRemTime== 0) acabar();
+            remMinutes = lRemTime / 60;
+            if (remMinutes != 0)
+                jLabel2.setText((remMinutes == 1 ? remMinutes + " Minuto " : remMinutes + " Minutos ") + (lRemTime - remMinutes * 60) + " Segundos");
+            else jLabel2.setText((lRemTime) + " Segundos");
+            if (lRemTime == 0) encerrarTempo();
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -157,7 +170,7 @@ public class TelaTempo extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -166,21 +179,16 @@ public class TelaTempo extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaTempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaTempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaTempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaTempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
-          java.awt.EventQueue.invokeLater(new Runnable() {
-          public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+
                 TelaTempo dialog = new TelaTempo(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -193,12 +201,4 @@ public class TelaTempo extends javax.swing.JDialog {
         });
 
     }
-    public static boolean aux;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
-    // End of variables declaration//GEN-END:variables
 }

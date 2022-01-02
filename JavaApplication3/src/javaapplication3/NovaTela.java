@@ -7,6 +7,8 @@ package javaapplication3;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -131,10 +133,12 @@ public class NovaTela extends javax.swing.JDialog {
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
+                        Logger.getLogger(NovaTela.class.getName()).log(Level.INFO, "Encerrando aplicação");
                         System.exit(0);
                     }
                 });
                 dialog.setVisible(true);
+                Logger.getLogger(NovaTela.class.getName()).log(Level.INFO, "Fim da execução");
             }
         });
     }
