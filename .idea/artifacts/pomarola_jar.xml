@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="pomarola:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/pomarola_jar</output-path>
-    <root id="archive" name="pomarola.jar">
-      <element id="module-output" name="pomarola" />
-    </root>
-  </artifact>
-</component>
